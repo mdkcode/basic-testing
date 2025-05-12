@@ -18,7 +18,6 @@ describe('throttledGetDataFromApi', () => {
     (axios.create as jest.Mock).mockImplementation(mockCreate);
     throttledGetDataFromApi('/posts/1');
     jest.advanceTimersByTime(THROTTLE_TIME);
-    await Promise.resolve();
     expect(mockCreate).toHaveBeenCalledWith({
       baseURL: 'https://jsonplaceholder.typicode.com',
     });
@@ -32,7 +31,6 @@ describe('throttledGetDataFromApi', () => {
     (axios.create as jest.Mock).mockImplementation(mockCreate);
     throttledGetDataFromApi('/posts/123');
     jest.advanceTimersByTime(THROTTLE_TIME);
-    await Promise.resolve();
     expect(mockGet).toHaveBeenCalledWith('/posts/123');
   });
 
@@ -47,7 +45,6 @@ describe('throttledGetDataFromApi', () => {
     };
     await call();
     jest.advanceTimersByTime(THROTTLE_TIME);
-    await Promise.resolve();
     expect(mockGet).toHaveBeenCalledWith('/posts/123');
     expect(result).toEqual(mockData);
   });
