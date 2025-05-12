@@ -12,11 +12,13 @@ describe('BankAccount', () => {
     expect(() => account.withdraw(900)).toThrow(InsufficientFundsError);
   });
 
-  // test('should throw error when transferring more than balance', () => {
-  //   const account = getBankAccount(500);
-  //   const toAccount = getBankAccount(700);
-  //   expect(() => account.transfer(500, toAccount)).toThrow(TransferFailedError);
-  // });
+  test('should throw error when transferring more than balance', () => {
+    const account = getBankAccount(500);
+    const toAccount = getBankAccount(700);
+    expect(() => account.transfer(600, toAccount)).toThrow(
+      InsufficientFundsError,
+    );
+  });
 
   test('should throw error when transferring to the same account', () => {
     const account = getBankAccount(500);
